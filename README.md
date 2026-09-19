@@ -26,17 +26,19 @@ La estructura mantiene la organización modular utilizada en las semanas anterio
 restaurante_app/
 ├── datos/
 │   ├── productos.json
-│   ├── usuarios.json
-│   ├── ventas.json
+│   └── usuarios.json
 ├── modelos/
 │   ├── __init__.py
 │   ├── producto.py
-│   ├── usuario.py
-│   └── venta.json
+│   └── usuario.py
 ├── servicios/
 │   ├── __init__.py
 │   ├── archivo_servicio.py
 │   └── restaurante.py
+├── ui/
+│   ├── __init__.py
+│   ├── login_view.py
+│   └── main_view.py
 ├── main.py
 └── README.md
 ```
@@ -45,26 +47,26 @@ restaurante_app/
 ## Componentes Técnicos Aplicados
 ---
 
-## Mejoras de Rendimiento
+## Componentes y Contenedores de Tkinter
 
-Para mejorar la velocidad de las operaciones, se incorporaron estructuras auxiliares en el archivo **restaurante.py**, por lo que el diccionario _indice_productos permite encontrar productos directamente mediante su **ID**, mientras que **_indice_usuarios** facilita la búsqueda de usuarios, además, **_indice_ventas_usuario** organiza las ventas según el usuario para consultar su historial sin recorrer todas las ventas, finalmente, los conjuntos **_ids_productos** y **_ids_usuarios** permiten comprobar rápidamente si un **ID** ya existe, evitando así registros duplicados y reduciendo recorridos innecesarios.
-
----
-
-## Sincronización de Colecciones
-
-Las estructuras auxiliares deben mantenerse actualizadas para que siempre coincidan con las listas principales, por esta razón, cuando el sistema inicia y recupera la información desde los archivos **JSON**, se ejecuta **_reconstruir_indices()** para volver a crear los índices en memoria, posteriormente, cada vez que se registra un **producto**, **usuario** o **venta**, la información se incorpora tanto a las colecciones principales como a los índices correspondientes, garantizando que las búsquedas y validaciones trabajen con información actualizada durante toda la ejecución.
+La interfaz gráfica incorpora diferentes componentes de Tkinter/ttk para organizar y facilitar la interacción con el usuario, utilizando ttk.Notebook para distribuir la información mediante pestañas, ttk.LabelFrame para agrupar visualmente los campos y controles, ttk.Treeview para mostrar productos y usuarios en forma de tabla, además de ttk.Entry para ingresar información y ttk.Button para ejecutar las diferentes acciones del sistema, de esta manera los componentes se integran dentro de contenedores que permiten mantener una interfaz ordenada y facilitar el uso de las operaciones disponibles.
 
 ---
 
-## Persistencia y Pruebas
+## Operaciones CRUD de Productos
 
-Para comprobar las mejoras implementadas se inició el sistema con información previamente almacenada y se verificó que los productos y usuarios pudieran localizarse rápidamente mediante sus identificadores, posteriormente, se realizaron varias ventas para un mismo usuario y se consultó su historial utilizando el índice correspondiente, además, se intentó registrar productos y usuarios con **IDs** existentes para comprobar que los conjuntos rechazaran los duplicados, finalmente, se realizó una venta exitosa y se verificó que el stock se actualizara correctamente tanto en memoria como en **productos.json**, mientras que la nueva transacción quedara registrada en **ventas.json**.
+La gestión de productos permite realizar las operaciones básicas de Crear, Leer, Actualizar y Eliminar, donde el usuario puede ingresar los datos de un nuevo producto mediante el formulario y registrarlo en el sistema, posteriormente los productos almacenados pueden visualizarse mediante Treeview, además se puede seleccionar un registro para modificar su información o eliminarlo cuando sea necesario, después de cada operación válida los cambios se guardan en productos.json, permitiendo que la información se mantenga disponible aunque la aplicación se cierre y vuelva a ejecutarse.
+
+---
+
+## Credenciales y Pruebas Realizadas
+
+Para comprobar el funcionamiento del sistema se utilizaron usuarios registrados en usuarios.json, además se mantiene un acceso directo mediante el identificador admin, permitiendo utilizar cualquier contraseña no vacía, mientras que para los usuarios registrados se utilizaron las cuentas 1101234567, 1950175750, 1104567890 y 1109876543, posteriormente se verificó el acceso a la interfaz principal y el funcionamiento de las operaciones CRUD, comprobando el registro de nuevos productos, la visualización de información mediante Treeview, la actualización y eliminación de registros y la persistencia de los cambios realizados en productos.json.
 
 ---
 
 ## Reflexión Final
 
-La incorporación de diccionarios y conjuntos demuestra que la elección adecuada de las estructuras de datos puede mejorar considerablemente el funcionamiento de una aplicación, ya que permiten realizar búsquedas, validaciones y consultas de manera más eficiente sin modificar la estructura principal del sistema, de esta manera, las listas continúan siendo útiles para almacenar la información y mantener la persistencia, mientras que los índices auxiliares optimizan las operaciones más frecuentes, logrando un sistema más rápido, organizado y preparado para trabajar con una mayor cantidad de datos.
+La incorporación de nuevos componentes y contenedores en Tkinter permite mejorar la organización de la interfaz gráfica y ampliar las funciones del sistema, especialmente mediante la implementación de operaciones CRUD que permiten administrar los productos de una manera más interactiva, además la persistencia automática en JSON mantiene la información disponible entre diferentes ejecuciones, de esta manera se continúa fortaleciendo la estructura modular de restaurante_app y se facilita la integración de nuevas funcionalidades en futuras versiones.
 
 <div>
